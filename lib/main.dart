@@ -128,7 +128,14 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('App del Clima - Mónica Martín Bautista'),
+        backgroundColor: Colors.blue.shade700, // Fondo azul
+        title: const Text(
+          'App del Clima - Mónica Martín Bautista',
+          style: TextStyle(
+            color: Colors.white, // Texto blanco
+            fontWeight: FontWeight.bold, // Negritas
+          ),
+        ),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -143,7 +150,10 @@ class _HomePageState extends State<HomePage> {
                     .map(
                       (entry) => DropdownMenuItem(
                         value: entry.value,
-                        child: Text(entry.key),
+                        child: Text(
+                          entry.key,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     )
                     .toList(),
@@ -169,7 +179,10 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: Text(
                         _error!,
-                        style: const TextStyle(color: Colors.red),
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -193,7 +206,10 @@ class _HomePageState extends State<HomePage> {
               else
                 const Expanded(
                   child: Center(
-                    child: Text('Selecciona una ciudad para ver su clima'),
+                    child: Text(
+                      'Selecciona una ciudad para ver su clima',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
                   ),
                 ),
             ],
@@ -233,6 +249,7 @@ class _ClimaCard extends StatelessWidget {
         : null;
     return Expanded(
       child: Card(
+        color: Colors.blue.shade50, // Fondo suave
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Center(
@@ -241,7 +258,10 @@ class _ClimaCard extends StatelessWidget {
                 children: [
                   Text(
                     '$ciudad${pais.isNotEmpty ? ", $pais" : ""}',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Colors.blue.shade900,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
@@ -253,13 +273,19 @@ class _ClimaCard extends StatelessWidget {
                         ? (descripcion[0].toUpperCase() +
                               descripcion.substring(1))
                         : '',
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.blue.shade700,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   if (temp != null)
                     Text(
                       '${temp!.toStringAsFixed(1)}°C',
-                      style: Theme.of(context).textTheme.displaySmall,
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                        color: Colors.red.shade600,
+                      ),
                     ),
                   const SizedBox(height: 8),
                   Wrap(
@@ -315,6 +341,13 @@ class _InfoChip extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Chip(avatar: Icon(icon), label: Text('$label: $value'));
+    return Chip(
+      avatar: Icon(icon, color: Colors.blue.shade800),
+      label: Text(
+        '$label: $value',
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      backgroundColor: Colors.blue.shade100,
+    );
   }
 }
